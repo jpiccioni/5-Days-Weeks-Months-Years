@@ -17,8 +17,8 @@ const todosStore = (set) => ({
     set((state) => ({
       todos: state.todos.map((t) =>
         t.id === todoId
-          ? { ...todo, completed: !todo.completed }
-          : todo
+          ? { ...t, completed: !t.completed }
+          : t
       )
     }))
   },

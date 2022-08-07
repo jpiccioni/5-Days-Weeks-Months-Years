@@ -1,16 +1,14 @@
 import './App.css'
+import { Heading } from '@chakra-ui/react'
 import AddTodoForm from './components/AddTodoForm.jsx'
-import TodosList from './components/TodosList.jsx'
+import TodosColumns from './components/TodosColumns.jsx'
 
 function App() {
   return (
     <div className="main-container">
-      <h1 style={{
-        fontSize: "2.5rem",
-        marginBottom: "2rem"
-      }}>5 D/W/M/Y</h1>
+      <Heading as='h1'>5 D/W/M/Y</Heading>
       <AddTodoForm />
-      <TodosList />
+      <TodosColumns />
     </div>
   )
 }
