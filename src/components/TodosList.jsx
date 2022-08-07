@@ -35,7 +35,7 @@ const TodosList = ({ type }) => {
                     />
                   </span>
                   <span>
-                    {todo?.title} - {todo.type}
+                    {todo?.title}
                   </span>
                   <Button
                     onClick={() => {
