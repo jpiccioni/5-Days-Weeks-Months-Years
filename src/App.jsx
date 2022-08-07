@@ -1,6 +1,6 @@
 import './App.css'
-import CourseForm from './components/CourseForm.jsx'
-import CourseList from './components/CourseList.jsx'
+import AddTodoForm from './components/AddTodoForm.jsx'
+import TodosList from './components/TodosList.jsx'
 
 function App() {
   return (
@@ -8,9 +8,9 @@ function App() {
       <h1 style={{
         fontSize: "2.5rem",
         marginBottom: "2rem"
-      }}>My Course List</h1>
-      <CourseForm />
-      <CourseList />
+      }}>5 D/W/M/Y</h1>
+      <AddTodoForm />
+      <TodosList />
     </div>
   )
 }

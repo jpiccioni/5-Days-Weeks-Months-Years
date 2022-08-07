@@ -36,7 +36,7 @@ ul {
   cursor: pointer;
 }
 
-.course-item {
+.todo-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,7 +48,7 @@ ul {
   font-weight: bold;
 }
 
-.course-item-col-1 {
+.todo-item-col-1 {
   display: flex;
   justify-content: flex-start;
   align-items: center;
