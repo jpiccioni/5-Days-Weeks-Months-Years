@@ -1,0 +1,1 @@
+Started following the tutorial from https://www.youtube.com/watch?v=KCr-UNsM3vA and began adapting it to a Todos list that I've been wanting to build.
