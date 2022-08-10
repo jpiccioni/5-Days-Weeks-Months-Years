@@ -32,7 +32,8 @@ const AddTodoForm = () => {
   }
 
   return (
-    <FormControl width="60rem" margin='1rem 0'>
+    <FormControl width="60rem" margin="1rem 0">
+      <FormLabel>Enter Todo and when you aim to complete it:</FormLabel>
       <InputGroup size="lg">
         <Input
           placeholder="Add Todo"
@@ -40,6 +41,9 @@ const AddTodoForm = () => {
           onChange={(e) => {
             setTodoTitle(e.target.value)
           }}
+          isRequired="true"
+          variant="filled"
+          errorBorderColor="red.500"
         />
         <InputRightElement width="10rem" marginRight="0.5rem">
           <Select
@@ -48,6 +52,8 @@ const AddTodoForm = () => {
               setTodoType(e.target.value)
             }}
             size="sm"
+            isRequired="true"
+            errorBorderColor="red.500"
           >
             <option value="days">Days</option>
             <option value="weeks">Weeks</option>
