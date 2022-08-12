@@ -13,13 +13,18 @@ const todosStore = (set) => ({
       todos: state.todos.filter((t) => t.id !== todoId),
     }))
   },
+  updateTodo: (todo) => {
+    set((state) => ({
+      todos: state.todos.map((t) =>
+        t.id === todo.id ? { ...t, title: todo.title, description: todo.description } : t
+      ),
+    }))
+  },
   toggleTodoStatus: (todoId) => {
     set((state) => ({
       todos: state.todos.map((t) =>
-        t.id === todoId
-          ? { ...t, completed: !t.completed }
-          : t
-      )
+        t.id === todoId ? { ...t, completed: !t.completed } : t
+      ),
     }))
   },
 })
@@ -27,10 +32,9 @@ const todosStore = (set) => ({
 const useTodosStore = create(
   devtools(
     persist(todosStore, {
-      name: 'todos'
+      name: 'todos',
     })
   )
 )
-
 
 export default useTodosStore

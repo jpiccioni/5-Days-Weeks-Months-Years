@@ -25,6 +25,7 @@ const AddTodoForm = () => {
       id: Math.ceil(Math.random() * 1000000),
       title: todoTitle,
       type: todoType,
+      description: '',
       completed: false,
     })
     setTodoTitle('')
@@ -36,29 +37,29 @@ const AddTodoForm = () => {
       <FormLabel>Enter Todo and when you aim to complete it:</FormLabel>
       <InputGroup size="lg">
         <Input
-          placeholder="Add Todo"
+          placeholder="What do I need to do?"
           value={todoTitle}
           onChange={(e) => {
             setTodoTitle(e.target.value)
           }}
-          isRequired="true"
+          isRequired={true}
           variant="filled"
           errorBorderColor="red.500"
         />
-        <InputRightElement width="10rem" marginRight="0.5rem">
+        <InputRightElement width="13rem" marginRight="0.5rem">
           <Select
-            placeholder="Select Type"
+            placeholder="When do I want to do it?"
             onChange={(e) => {
               setTodoType(e.target.value)
             }}
             size="sm"
-            isRequired="true"
+            isRequired={true}
             errorBorderColor="red.500"
           >
-            <option value="days">Days</option>
-            <option value="weeks">Weeks</option>
-            <option value="months">Months</option>
-            <option value="years">Years</option>
+            <option value="days">The next 5 Days</option>
+            <option value="weeks">The next 5 Weeks</option>
+            <option value="months">The next 5 Months</option>
+            <option value="years">The next 5 Years</option>
           </Select>
         </InputRightElement>
       </InputGroup>
