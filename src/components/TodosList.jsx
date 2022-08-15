@@ -62,7 +62,12 @@ function TodoModal({ todo }) {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button 
+              colorScheme="blue" 
+              variant="ghost"
+              mr={3} 
+              onClick={onClose}
+            >
               Close
             </Button>
             <Button
@@ -73,22 +78,6 @@ function TodoModal({ todo }) {
               }}
             >
               Update Todo
-            </Button>
-            <Button
-              variant="ghost"
-              onClick={() =>
-                console.log(
-                  // todo
-                  'ID: ' +
-                  todo.id +
-                  ', Title: ' +
-                  todoTitle +
-                  ', Description: ' +
-                  todoDescription
-                )
-              }
-            >
-              Log
             </Button>
           </ModalFooter>
         </ModalContent>
