@@ -13,6 +13,7 @@ import {
   ModalCloseButton,
   Textarea,
   Input,
+  Text
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 
@@ -24,6 +25,8 @@ function TodoModal({ todo }) {
   const [todoDescription, setTodoDescription] = useState(
     todo.description
   )
+  const [todoCreated, setTodoCreated] = useState(todo.createdDate)
+  const [todoUpdated, setTodoUpdated] = useState(todo.updatedDate)
 
   const handleTodoUpdate = () => {
     if (!todoTitle) return alert('Please add a title for this Todo')
@@ -31,6 +34,8 @@ function TodoModal({ todo }) {
       id: todo.id,
       title: todoTitle,
       description: todoDescription,
+      createdDate: todo.createdDate,
+      updatedDate: setTodoUpdated(new Date().toLocaleString()),
       // completed: false,
     })
     onClose()
@@ -59,6 +64,7 @@ function TodoModal({ todo }) {
               }}
               value={todoDescription}
             ></Textarea>
+            <Text fontSize='xs'>Added {todoCreated} | Updated {todoUpdated}</Text>
           </ModalBody>
 
           <ModalFooter>

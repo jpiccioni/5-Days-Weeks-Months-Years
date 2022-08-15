@@ -16,7 +16,14 @@ const todosStore = (set) => ({
   updateTodo: (todo) => {
     set((state) => ({
       todos: state.todos.map((t) =>
-        t.id === todo.id ? { ...t, title: todo.title, description: todo.description } : t
+        t.id === todo.id
+          ? {
+              ...t,
+              title: todo.title,
+              description: todo.description,
+              updatedDate: todo.updatedDate,
+            }
+          : t
       ),
     }))
   },
