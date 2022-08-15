@@ -104,7 +104,7 @@ const TodosList = ({ type }) => {
                 <li
                   className={`todo-item`}
                   style={{
-                    backgroundColor: todo.completed ? '#00FF0044' : 'white',
+                    backgroundColor: todo.completed ? '#00FF0044' : '',
                   }}
                 >
                   <TodoModal todo={todo} />
