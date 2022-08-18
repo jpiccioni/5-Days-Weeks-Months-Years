@@ -12,79 +12,111 @@ import {
   ModalBody,
   ModalCloseButton,
   Textarea,
-  Input,
-  Text
+  Text,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  Flex,
+  Box,
+  Spacer
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 
 function TodoModal({ todo }) {
-  // let currentTodo = todo
-  const updateTodo = useTodosStore((state) => state.updateTodo)
+  console.log(todo)
+  const { updateTodo, toggleTodoStatus } = useTodosStore((state) => ({
+    updateTodo: state.updateTodo,
+    toggleTodoStatus: state.toggleTodoStatus,
+  }))
 
   const [todoTitle, setTodoTitle] = useState(todo.title)
-  const [todoDescription, setTodoDescription] = useState(
-    todo.description
-  )
+  const [todoDescription, setTodoDescription] = useState(todo.description)
   const [todoCreated, setTodoCreated] = useState(todo.createdDate)
   const [todoUpdated, setTodoUpdated] = useState(todo.updatedDate)
 
   const handleTodoUpdate = () => {
     if (!todoTitle) return alert('Please add a title for this Todo')
+
+    setTodoUpdated(new Date().toLocaleString())
+
     updateTodo({
       id: todo.id,
       title: todoTitle,
       description: todoDescription,
       createdDate: todo.createdDate,
-      updatedDate: setTodoUpdated(new Date().toLocaleString()),
+      updatedDate: todoUpdated,
       // completed: false,
     })
-    onClose()
+
+    //onClose()
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen}>Open</Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} size="xl" onClose={onClose} autoFocus="false">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{todoTitle}</ModalHeader>
+          <ModalHeader>
+            <Editable value={todoTitle} width="90%">
+              <EditablePreview />
+              <EditableInput
+                onChange={(e) => {
+                  setTodoTitle(e.target.value)
+                }}
+              />
+            </Editable>
+            <Text fontSize="xs">
+              Added {todoCreated} | Updated {todoUpdated}
+            </Text>
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Input
-              value={todoTitle}
-              onChange={(e) => {
-                setTodoTitle(e.target.value)
-              }}
-            />
             <Textarea
               placeholder="Add some details..."
               onChange={(e) => {
                 setTodoDescription(e.target.value)
               }}
               value={todoDescription}
+              size="sm"
             ></Textarea>
-            <Text fontSize='xs'>Added {todoCreated} | Updated {todoUpdated}</Text>
           </ModalBody>
 
           <ModalFooter>
-            <Button 
-              colorScheme="blue" 
-              variant="ghost"
-              mr={3} 
-              onClick={onClose}
-            >
-              Close
-            </Button>
-            <Button
-              colorScheme="green"
-              variant="ghost"
-              onClick={() => {
-                handleTodoUpdate()
-              }}
-            >
-              Update Todo
-            </Button>
+            <Flex width='100%' alignItems='center'>
+              <Box>
+                <Checkbox
+                  isChecked={todo.completed}
+                  colorScheme="green"
+                  onChange={(e) => {
+                    toggleTodoStatus(todo.id)
+                  }}
+                >
+                  Completed
+                </Checkbox>
+              </Box>
+              <Spacer />
+              <Box>
+                <Button
+                  colorScheme="blue"
+                  variant="ghost"
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Close
+                </Button>
+                <Button
+                  colorScheme="green"
+                  variant="ghost"
+                  onClick={() => {
+                    handleTodoUpdate()
+                  }}
+                >
+                  Update Todo
+                </Button>
+              </Box>
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -116,7 +148,7 @@ const TodosList = ({ type }) => {
                   <TodoModal todo={todo} />
                   <span className="todo-item-col-1">
                     <Checkbox
-                      checked={todo.completed}
+                      isChecked={todo.completed}
                       colorScheme="green"
                       onChange={(e) => {
                         toggleTodoStatus(todo.id)
