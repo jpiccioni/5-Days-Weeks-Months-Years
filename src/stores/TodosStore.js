@@ -19,9 +19,10 @@ const todosStore = (set) => ({
         t.id === todo.id
           ? {
               ...t,
-              title: todo.title,
-              description: todo.description,
-              updatedDate: todo.updatedDate,
+              ...todo
+              // title: todo.title,
+              // description: todo.description,
+              // updatedDate: todo.updatedDate,
             }
           : t
       ),

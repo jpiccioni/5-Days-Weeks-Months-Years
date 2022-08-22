@@ -34,17 +34,16 @@ const AddTodoForm = () => {
       description: '',
       completed: false,
       createdDate: new Date().toLocaleString(),
-      updatedDate: '',
+      updatedDate: null,
     })
     setTodoTitle('')
-    setTodoType('')
   }
 
   return (
     <>
       <FormControl margin="1rem 0">
         <FormLabel>Enter Todo and when you aim to complete it:</FormLabel>
-        <Flex>
+        <Flex alignItems='center'>
           <Box w='90%'>
             <InputGroup size="lg">
               <Input
@@ -65,6 +64,7 @@ const AddTodoForm = () => {
                   }}
                   size="sm"
                   isRequired={true}
+                  variant='filled'
                   errorBorderColor="red.500"
                 >
                   <option value="days">The next 5 Days</option>

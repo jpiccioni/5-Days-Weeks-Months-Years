@@ -23,7 +23,7 @@ import {
 import { CloseIcon } from '@chakra-ui/icons'
 
 function TodoModal({ todo }) {
-  console.log(todo)
+  // console.log(todo)
   const { updateTodo, toggleTodoStatus } = useTodosStore((state) => ({
     updateTodo: state.updateTodo,
     toggleTodoStatus: state.toggleTodoStatus,
@@ -48,14 +48,13 @@ function TodoModal({ todo }) {
       // completed: false,
     })
 
-    //onClose()
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen}>Open</Button>
-      <Modal isOpen={isOpen} size="xl" onClose={onClose} autoFocus="false">
+      <Modal isOpen={isOpen} size="xl" onClose={onClose} autoFocus={false}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
