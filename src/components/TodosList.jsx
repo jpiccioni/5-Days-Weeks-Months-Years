@@ -45,7 +45,6 @@ function TodoModal({ todo }) {
       description: todoDescription,
       createdDate: todo.createdDate,
       updatedDate: todoUpdated,
-      // completed: false,
     })
 
   }
