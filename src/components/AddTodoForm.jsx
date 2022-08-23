@@ -15,6 +15,7 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
+import { add } from 'date-fns'
 
 import useTodosStore from '../stores/TodosStore'
 
@@ -27,13 +28,34 @@ const AddTodoForm = () => {
   const handleTodoSubmit = () => {
     if (!todoTitle) return alert('Please add a title for this Todo')
     if (!todoType) return alert('Please select a type for this Todo')
+
+    const createdDate = new Date().toLocaleString()
+
+    let generatedDueDate = null
+    switch (todoType) {
+      case 'days':
+        generatedDueDate = add(new Date(createdDate), { days: 5 })
+        break
+      case 'weeks':
+        generatedDueDate = add(new Date(createdDate), { weeks: 5 })
+        break
+      case 'months':
+        generatedDueDate = add(new Date(createdDate), { months: 5 })
+        break
+      case 'years':
+        generatedDueDate = add(new Date(createdDate), { years: 5 })
+        break
+    }
+    const dueDate = new Date(generatedDueDate).toLocaleString()
+
     addTodo({
       id: nanoid(),
       title: todoTitle,
       type: todoType,
       description: '',
       completed: false,
-      createdDate: new Date().toLocaleString(),
+      createdDate: createdDate,
+      dueDate: dueDate,
       updatedDate: null,
     })
     setTodoTitle('')

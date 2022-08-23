@@ -31,7 +31,6 @@ function TodoModal({ todo }) {
 
   const [todoTitle, setTodoTitle] = useState(todo.title)
   const [todoDescription, setTodoDescription] = useState(todo.description)
-  const [todoCreated, setTodoCreated] = useState(todo.createdDate)
   const [todoUpdated, setTodoUpdated] = useState(todo.updatedDate)
 
   const handleTodoUpdate = () => {
@@ -43,7 +42,6 @@ function TodoModal({ todo }) {
       id: todo.id,
       title: todoTitle,
       description: todoDescription,
-      createdDate: todo.createdDate,
       updatedDate: todoUpdated,
     })
 
@@ -66,7 +64,9 @@ function TodoModal({ todo }) {
               />
             </Editable>
             <Text fontSize="xs">
-              Added {todoCreated} | Updated {todoUpdated}
+              Added {todo.createdDate}<br />
+              Updated {todoUpdated}<br />
+              Due {todo.dueDate}
             </Text>
           </ModalHeader>
           <ModalCloseButton />
@@ -153,7 +153,13 @@ const TodosList = ({ type }) => {
                       }}
                     />
                   </span>
-                  <span>{todo?.title}</span>
+                  <span
+                    style={{
+                      color: !todo.completed && todo.dueDate < new Date().toLocaleString() ? 'tomato' : ''
+                    }}
+                  >
+                    {todo?.title}
+                  </span>
                   <Button
                     onClick={() => {
                       removeTodo(todo.id)
