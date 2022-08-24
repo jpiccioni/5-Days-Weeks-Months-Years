@@ -29,7 +29,7 @@ const AddTodoForm = () => {
     if (!todoTitle) return alert('Please add a title for this Todo')
     if (!todoType) return alert('Please select a type for this Todo')
 
-    const createdDate = new Date().toLocaleString()
+    const createdDate = new Date()
 
     let generatedDueDate = null
     switch (todoType) {
@@ -46,7 +46,7 @@ const AddTodoForm = () => {
         generatedDueDate = add(new Date(createdDate), { years: 5 })
         break
     }
-    const dueDate = new Date(generatedDueDate).toLocaleString()
+    const dueDate = new Date(generatedDueDate)
 
     addTodo({
       id: nanoid(),

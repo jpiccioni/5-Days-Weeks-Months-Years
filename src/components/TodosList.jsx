@@ -18,12 +18,11 @@ import {
   EditablePreview,
   Flex,
   Box,
-  Spacer
+  Spacer,
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 
 function TodoModal({ todo }) {
-  // console.log(todo)
   const { updateTodo, toggleTodoStatus } = useTodosStore((state) => ({
     updateTodo: state.updateTodo,
     toggleTodoStatus: state.toggleTodoStatus,
@@ -31,20 +30,16 @@ function TodoModal({ todo }) {
 
   const [todoTitle, setTodoTitle] = useState(todo.title)
   const [todoDescription, setTodoDescription] = useState(todo.description)
-  const [todoUpdated, setTodoUpdated] = useState(todo.updatedDate)
 
   const handleTodoUpdate = () => {
     if (!todoTitle) return alert('Please add a title for this Todo')
-
-    setTodoUpdated(new Date().toLocaleString())
 
     updateTodo({
       id: todo.id,
       title: todoTitle,
       description: todoDescription,
-      updatedDate: todoUpdated,
+      updatedDate: new Date(),
     })
-
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -63,11 +58,16 @@ function TodoModal({ todo }) {
                 }}
               />
             </Editable>
-            <Text fontSize="xs">
-              Added {todo.createdDate}<br />
-              Updated {todoUpdated}<br />
-              Due {todo.dueDate}
-            </Text>
+            <p style={{ fontWeight: "normal"}}>
+              <Text fontSize="xs">
+                Added: {new Date(todo.createdDate).toLocaleString()} &mdash;
+                Due: {new Date(todo.dueDate).toLocaleString()}
+                <br />
+                {todo.updatedDate
+                  ? 'Updated: ' + new Date(todo.updatedDate).toLocaleString()
+                  : ''}
+              </Text>
+            </p>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -78,11 +78,13 @@ function TodoModal({ todo }) {
               }}
               value={todoDescription}
               size="sm"
+              variant="filled"
+              rows="5"
             ></Textarea>
           </ModalBody>
 
           <ModalFooter>
-            <Flex width='100%' alignItems='center'>
+            <Flex width="100%" alignItems="center">
               <Box>
                 <Checkbox
                   isChecked={todo.completed}
@@ -155,7 +157,10 @@ const TodosList = ({ type }) => {
                   </span>
                   <span
                     style={{
-                      color: !todo.completed && todo.dueDate < new Date().toLocaleString() ? 'tomato' : ''
+                      color:
+                        !todo.completed && new Date() > new Date(todo.dueDate)
+                          ? 'tomato'
+                          : '',
                     }}
                   >
                     {todo?.title}

@@ -20,9 +20,6 @@ const todosStore = (set) => ({
           ? {
               ...t,
               ...todo
-              // title: todo.title,
-              // description: todo.description,
-              // updatedDate: todo.updatedDate,
             }
           : t
       ),
